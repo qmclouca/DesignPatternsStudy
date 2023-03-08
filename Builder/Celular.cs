@@ -8,9 +8,9 @@
             this.nomeCelular = nome;
         }
         public string Nome { get; set; }
-        public ETela tela { get; set; }
-        public EBateria bateria { get; set; }
-        public ESistemaOperacional Sistema { get; set; }
-        public ECamera camera { get; set; }
+        public string tela { get; set; }
+        public string bateria { get; set; }
+        public string Sistema { get; set; }
+        public string camera { get; set; }
     }
 }

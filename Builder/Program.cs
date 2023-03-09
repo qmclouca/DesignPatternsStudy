@@ -9,7 +9,7 @@
 
             celularBuilder = new IphoneBuilder();
             fabricante.Construir(celularBuilder);
-            Console.WriteLine("Um novo celular foi construído: \n\n{0}", celularBuilder.ToString());
+            Console.WriteLine("Um novo celular foi construído: \n\n{0}", celularBuilder.Celular.Nome);
             Console.ReadKey();
         }
     }

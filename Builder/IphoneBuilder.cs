@@ -4,9 +4,13 @@ namespace Builder
     {
         Celular celular;
 
+        public Celular Celular
+        {
+            get { return this.celular; }
+        }
         public IphoneBuilder() 
         {
-            celular = new Celular("Iphone");
+           this.celular = new Celular("Iphone");
         }
 
         public void BuildBateria()
@@ -27,11 +31,6 @@ namespace Builder
         public void BuildTela()
         {
             this.celular.tela = "9\"";
-        }
-
-        public Celular Celular
-        {
-            get { return this.celular; }
         }
     }    
 }

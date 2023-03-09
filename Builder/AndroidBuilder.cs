@@ -3,10 +3,14 @@ namespace Builder
     public class AndroidBuilder : ICelular
     {
         Celular celular;
+        public Celular Celular
+        {
+            get { return this.celular; }
+        }
 
         public AndroidBuilder() 
         {
-            celular = new Celular("Android");
+            this.celular = new Celular("Android");
         }
 
         public void BuildBateria()
@@ -27,11 +31,6 @@ namespace Builder
         public void BuildTela()
         {
             this.celular.tela = "6.5\"";
-        }
-
-        public Celular Celular
-        {
-            get { return this.celular; }
         }
     }    
 }

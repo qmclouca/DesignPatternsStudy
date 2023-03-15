@@ -8,8 +8,8 @@ namespace Decorator
 
         public Livro(string autor, string titulo, int numeroCopias)
         {
-            this.autor = autor;
             this.titulo = titulo;
+            this.autor = autor;
             this.numeroCopias = numeroCopias;
         }
 

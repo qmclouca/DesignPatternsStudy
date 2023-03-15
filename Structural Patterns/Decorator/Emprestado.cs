@@ -1,5 +1,6 @@
 ﻿namespace Decorator
 {
+    //Decorador concreto
     public class Emprestado: Decorator
     {
         protected string[] nomesEmprestados = new string[10];

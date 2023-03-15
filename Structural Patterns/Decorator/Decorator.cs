@@ -1,5 +1,6 @@
 ﻿namespace Decorator
 {
+    //Decorador Abstrato
     public class Decorator: ItemBiblioteca
     {
         protected ItemBiblioteca itemBiblioteca;

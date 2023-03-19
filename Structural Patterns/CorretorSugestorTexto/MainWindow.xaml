@@ -1,0 +1,31 @@
+﻿<Window x:Class="CorretorSugestorTexto.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CorretorSugestorTexto"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition></RowDefinition>            
+        </Grid.RowDefinitions>
+        <Label x:Name="suggestion_1" Grid.Row="0" Grid.Column="0" BorderBrush="Black" BorderThickness="2"></Label>
+        <Label x:Name="suggestion_2" Grid.Row="0" Grid.Column="1" BorderBrush="Black" BorderThickness="2"></Label>
+        <Label x:Name="suggestion_3" Grid.Row="0" Grid.Column="2" BorderBrush="Black" BorderThickness="2"></Label>
+        <TextBox x:Name="message" 
+                 TextChanged="CheckSpell"  
+                 Grid.Row="1" Grid.Column="0" 
+                 SpellCheck.IsEnabled="True" 
+                 Grid.ColumnSpan="3" 
+                 Background="LightBlue">            
+        </TextBox>
+        <Button Grid.Column="2" Content="Button" Click="Show" HorizontalAlignment="Left" Margin="134,349,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+    </Grid>
+</Window>

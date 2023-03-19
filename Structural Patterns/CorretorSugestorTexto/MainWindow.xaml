@@ -25,7 +25,6 @@
                  SpellCheck.IsEnabled="True" 
                  Grid.ColumnSpan="3" 
                  Background="LightBlue">            
-        </TextBox>
-        <Button Grid.Column="2" Content="Button" Click="Show" HorizontalAlignment="Left" Margin="134,349,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+        </TextBox>        
     </Grid>
 </Window>

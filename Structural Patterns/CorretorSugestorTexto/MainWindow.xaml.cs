@@ -42,24 +42,6 @@ namespace CorretorSugestorTexto
                 }
                 pos++;
             }
-        }
-
-        private void Show(object sender, RoutedEventArgs e)
-        {
-            List<string> suggestions = new List<string>();
-            if (spellingErrors != null)
-            {
-                foreach (SpellingError spellingError in spellingErrors)
-                {
-                    foreach (string suggestion in spellingError.Suggestions)
-                    {
-                        suggestions.Add(suggestion);
-                    }
-                }
-
-                MessageBox.Show("Sugestão 1: " + suggestions[0]);
-            }
-            else return;            
-        }
+        }        
     }
 }

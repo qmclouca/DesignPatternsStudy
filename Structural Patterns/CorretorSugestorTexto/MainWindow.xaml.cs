@@ -9,8 +9,8 @@ namespace CorretorSugestorTexto
 {
     public partial class MainWindow : Window
     {
-        public static MainWindow _mainWindow = new MainWindow();
-        public List<SpellingError> spellingErrors = new List<SpellingError>();
+        private readonly List<SpellingError> _spellingErrors = new List<SpellingError>();
+
         public MainWindow()
         {
             InitializeComponent();
@@ -18,56 +18,56 @@ namespace CorretorSugestorTexto
 
         private void CheckSpell(object sender, TextChangedEventArgs e)
         {
-            int caretIndex = message.CaretIndex;
-            if (caretIndex >= 0)
+            var caretIndex = message.CaretIndex;
+
+            if (caretIndex < 0) return;
+
+            var lastSpaceIndex = message.Text.LastIndexOf(' ', caretIndex - 1);
+            var start = lastSpaceIndex >= 0 ? lastSpaceIndex + 1 : 0;
+            var length = caretIndex - start;
+
+            if (length <= 0)
             {
-                int lastSpaceIndex = message.Text.LastIndexOf(' ', caretIndex - 1);
-                int start = 0;
-                if (lastSpaceIndex >= 0)
-                {
-                    start = lastSpaceIndex + 1;
-                }
-                int length = caretIndex - start;
-                if (length <= 0)
-                {
-                    // no word to check
-                    CleanSuggestions();
-                    return;
-                }
-                string word = string.Empty;
-                if (start >= 0 && start + length <= message.Text.Length)
-                {
-                    word = message.Text.Substring(start, length);
-                }
-                if (word.Length > 0)
-                {
-                    int errorPosition = message.GetNextSpellingErrorCharacterIndex(start, LogicalDirection.Forward);
-                    if (errorPosition >= 0)
-                    {
-                        SpellingError spellingError = message.GetSpellingError(errorPosition);
-                        IEnumerable<string> suggestions = spellingError.Suggestions;
-                        suggestion_1.Content = suggestions.ElementAtOrDefault(0) ?? String.Empty;
-                        suggestion_2.Content = suggestions.ElementAtOrDefault(1) ?? String.Empty;
-                        suggestion_3.Content = suggestions.ElementAtOrDefault(2) ?? String.Empty;
-                    }
-                    else
-                    {
-                        CleanSuggestions();
-                    }
-                }
+                // No word to check
+                CleanSuggestions();
+                return;
             }
+
+            var word = message.Text.Substring(start, length);
+
+            if (word.Length <= 0) return;
+
+            var errorPosition = message.GetNextSpellingErrorCharacterIndex(start, LogicalDirection.Forward);
+
+            if (errorPosition < 0)
+            {
+                CleanSuggestions();
+                return;
+            }
+
+            var spellingError = message.GetSpellingError(errorPosition);
+
+            if (spellingError == null) return;
+
+            var suggestions = spellingError.Suggestions;
+
+            suggestion_1.Content = suggestions.ElementAtOrDefault(0) ?? string.Empty;
+            suggestion_2.Content = suggestions.ElementAtOrDefault(1) ?? string.Empty;
+            suggestion_3.Content = suggestions.ElementAtOrDefault(2) ?? string.Empty;
         }
 
         private void SuggestionLabel_Click(object sender, RoutedEventArgs e)
         {
-            Label suggestionLabel = (Label)sender;
-            string suggestion = suggestionLabel.Content.ToString();
-            int caretIndex = message.CaretIndex;
-            int start = 0;
-            int length = 0;
+            var suggestionLabel = (Label)sender;
+            var suggestion = suggestionLabel.Content.ToString();
+            var caretIndex = message.CaretIndex;
+            var start = 0;
+            var length = 0;
+
             if (caretIndex > 0)
             {
-                int lastSpaceIndex = message.Text.LastIndexOf(' ', caretIndex - 1);
+                var lastSpaceIndex = message.Text.LastIndexOf(' ', caretIndex - 1);
+
                 if (lastSpaceIndex >= 0)
                 {
                     start = lastSpaceIndex + 1;
@@ -79,25 +79,20 @@ namespace CorretorSugestorTexto
                 }
             }
 
-            message.Select(start, length);
-            try
-            {
-                message.SelectedText = suggestion;
-            }
-            catch (Exception)
-            {
-                CleanSuggestions();
-                return; 
-            }
+            var originalWord = message.Text.Substring(start, length);
+            var newWord = suggestion + " ";
+
+            message.Select(start + originalWord.Length, length - originalWord.Length);
+            message.SelectedText = newWord;
 
             CleanSuggestions();
         }
 
         private void CleanSuggestions()
         {
-            suggestion_1.Content = String.Empty;
-            suggestion_2.Content = String.Empty;
-            suggestion_3.Content = String.Empty;
+            suggestion_1.Content = string.Empty;
+            suggestion_2.Content = string.Empty;
+            suggestion_3.Content = string.Empty;
         }
     }
 }

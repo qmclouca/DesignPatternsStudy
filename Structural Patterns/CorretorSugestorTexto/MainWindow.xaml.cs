@@ -1,17 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace CorretorSugestorTexto
 {    
@@ -26,22 +18,65 @@ namespace CorretorSugestorTexto
 
         private void CheckSpell(object sender, TextChangedEventArgs e)
         {
-            int pos = 0;     
-            foreach (char c in message.Text)
+            int caretIndex = message.CaretIndex;
+            if (caretIndex >= 0)
             {
-                if (c == ' ')
+                int lastSpaceIndex = message.Text.LastIndexOf(' ', caretIndex - 1);
+                int start = 0;
+                if (lastSpaceIndex >= 0)
                 {
-                    int errorPosition = message.GetNextSpellingErrorCharacterIndex(pos, LogicalDirection.Forward);
+                    start = lastSpaceIndex + 1;
+                }
+                int length = caretIndex - start;
+                string word = message.Text.Substring(start, length);
+                if (word.Length > 0)
+                {
+                    int errorPosition = message.GetNextSpellingErrorCharacterIndex(start, LogicalDirection.Forward);
                     if (errorPosition >= 0)
                     {
-                        IEnumerable<string> suggestions = message.GetSpellingError(errorPosition).Suggestions;
-                        suggestion_1.Content = suggestions.ElementAt(0) != null ? suggestions.ElementAt(0) : String.Empty;
-                        suggestion_2.Content = suggestions.ElementAt(1) != null ? suggestions.ElementAt(1) : String.Empty;
-                        suggestion_3.Content = suggestions.ElementAt(2) != null ? suggestions.ElementAt(2) : String.Empty;
+                        SpellingError spellingError = message.GetSpellingError(errorPosition);
+                        IEnumerable<string> suggestions = spellingError.Suggestions;
+                        suggestion_1.Content = suggestions.ElementAtOrDefault(0) ?? String.Empty;
+                        suggestion_2.Content = suggestions.ElementAtOrDefault(1) ?? String.Empty;
+                        suggestion_3.Content = suggestions.ElementAtOrDefault(2) ?? String.Empty;
+                    }
+                    else
+                    {
+                        suggestion_1.Content = String.Empty;
+                        suggestion_2.Content = String.Empty;
+                        suggestion_3.Content = String.Empty;
                     }
                 }
-                pos++;
             }
-        }        
+        }
+
+        private void SuggestionLabel_Click(object sender, RoutedEventArgs e)
+        {
+            Label suggestionLabel = (Label)sender;
+            string suggestion = suggestionLabel.Content.ToString();
+            int caretIndex = message.CaretIndex;
+            if (caretIndex > 0)
+            {
+                int lastSpaceIndex = message.Text.LastIndexOf(' ', caretIndex - 1);
+                if (lastSpaceIndex >= 0)
+                {
+                    int start = lastSpaceIndex + 1;
+                    int length = caretIndex - start;
+                    string word = message.Text.Substring(start, length);
+                    if (word.Length > 0)
+                    {
+                        int errorPosition = message.GetNextSpellingErrorCharacterIndex(start, LogicalDirection.Forward);
+                        if (errorPosition >= 0)
+                        {
+                            message.Select(start + errorPosition, length);
+                            message.SelectedText = suggestion;
+                        }
+                    }
+                }
+            }
+            suggestion_1.Content = String.Empty;
+            suggestion_2.Content = String.Empty;
+            suggestion_3.Content = String.Empty;
+        }
     }
 }

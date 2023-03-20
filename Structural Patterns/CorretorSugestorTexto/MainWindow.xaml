@@ -16,9 +16,9 @@
             <RowDefinition Height="30"></RowDefinition>
             <RowDefinition></RowDefinition>            
         </Grid.RowDefinitions>
-        <Label x:Name="suggestion_1" Grid.Row="0" Grid.Column="0" BorderBrush="Black" BorderThickness="2"></Label>
-        <Label x:Name="suggestion_2" Grid.Row="0" Grid.Column="1" BorderBrush="Black" BorderThickness="2"></Label>
-        <Label x:Name="suggestion_3" Grid.Row="0" Grid.Column="2" BorderBrush="Black" BorderThickness="2"></Label>
+        <Label x:Name="suggestion_1" MouseLeftButtonDown="SuggestionLabel_Click" Grid.Row="0" Grid.Column="0" BorderBrush="Black" BorderThickness="2"></Label>
+        <Label x:Name="suggestion_2" MouseLeftButtonDown="SuggestionLabel_Click" Grid.Row="0" Grid.Column="1" BorderBrush="Black" BorderThickness="2"></Label>
+        <Label x:Name="suggestion_3" MouseLeftButtonDown="SuggestionLabel_Click" Grid.Row="0" Grid.Column="2" BorderBrush="Black" BorderThickness="2"></Label>
         <TextBox x:Name="message" 
                  TextChanged="CheckSpell"  
                  Grid.Row="1" Grid.Column="0" 

@@ -79,11 +79,17 @@ namespace CorretorSugestorTexto
                 }
             }
 
-            var originalWord = message.Text.Substring(start, length);
-            var newWord = suggestion + " ";
+            message.Select(start, length);
 
-            message.Select(start + originalWord.Length, length - originalWord.Length);
-            message.SelectedText = newWord;
+            try
+            {
+                message.SelectedText = suggestion;
+            }
+            catch (Exception)
+            {
+                CleanSuggestions();
+                return;
+            }
 
             CleanSuggestions();
         }

@@ -9,8 +9,6 @@ namespace CorretorSugestorTexto
 {
     public partial class MainWindow : Window
     {
-        private readonly List<SpellingError> _spellingErrors = new List<SpellingError>();
-
         public MainWindow()
         {
             InitializeComponent();
@@ -83,11 +81,13 @@ namespace CorretorSugestorTexto
 
             try
             {
-                message.SelectedText = suggestion;
+                message.SelectedText = suggestion + " ";
+                message.CaretIndex = message.Text.Length + 1;
             }
             catch (Exception)
             {
                 CleanSuggestions();
+                message.CaretIndex = message.Text.Length + 1;
                 return;
             }
 

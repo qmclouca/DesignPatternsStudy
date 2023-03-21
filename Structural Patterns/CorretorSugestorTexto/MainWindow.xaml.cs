@@ -18,7 +18,7 @@ namespace CorretorSugestorTexto
         {
             var caretIndex = message.CaretIndex;
 
-            if (caretIndex < 0) return;
+            if (caretIndex =< 0) return;
 
             var lastSpaceIndex = message.Text.LastIndexOf(' ', caretIndex - 1);
             var start = lastSpaceIndex >= 0 ? lastSpaceIndex + 1 : 0;

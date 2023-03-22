@@ -10,9 +10,6 @@
             FabricaFlyWeight tartarugaFactory = new FabricaFlyWeight();
             Tartaruga tartaruga1 = tartarugaFactory.GetTartaruga("vermelha");
 
-            
-            
-            
         }
     }
 }

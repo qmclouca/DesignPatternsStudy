@@ -35,9 +35,10 @@ namespace CorretorSugestorTexto
                     if (errorPosition >= 0)
                     {
                         IEnumerable<string> suggestions = message.GetSpellingError(errorPosition).Suggestions;
-                        suggestion_1.Content = suggestions.ElementAt(0) != null ? suggestions.ElementAt(0) : String.Empty;
-                        suggestion_2.Content = suggestions.ElementAt(1) != null ? suggestions.ElementAt(1) : String.Empty;
-                        suggestion_3.Content = suggestions.ElementAt(2) != null ? suggestions.ElementAt(2) : String.Empty;
+                        int suggestionQuantity = suggestions.Count();
+                        suggestion_1.Content = suggestionQuantity>0 ? suggestions.ElementAt(0) : String.Empty;
+                        suggestion_2.Content = suggestionQuantity>1 ? suggestions.ElementAt(1) : String.Empty;
+                        suggestion_3.Content = suggestionQuantity>2 ? suggestions.ElementAt(2) : String.Empty;
                     }
                 }
                 pos++;

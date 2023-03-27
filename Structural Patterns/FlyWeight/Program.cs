@@ -7,8 +7,18 @@
             Console.WriteLine();
             Console.WriteLine("FlyWeight");
             Console.WriteLine();
-            FabricaFlyWeight tartarugaFactory = new FabricaFlyWeight();
-            Tartaruga tartaruga1 = tartarugaFactory.GetTartaruga("vermelha");
+            Tartaruga tartaruga1;
+            while (true)
+            {
+                Console.WriteLine();
+                Console.WriteLine("Qual tartaruga mostrar?");
+                string cor = Console.ReadLine();
+
+                tartaruga1 = FabricaFlyWeight.GetTartaruga(cor);
+                tartaruga1.Mostra(cor);
+                Console.WriteLine();
+                Console.WriteLine("------------------");
+            }
 
         }
     }

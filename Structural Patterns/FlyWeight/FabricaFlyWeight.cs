@@ -1,6 +1,6 @@
 ﻿namespace FlyWeight
 {
-    internal class FabricaFlyWeight
+    public class FabricaFlyWeight
     {
         private static readonly Dictionary<string, Tartaruga> Tartarugas = new Dictionary<string, Tartaruga>();
         public static Tartaruga GetTartaruga(string cor)

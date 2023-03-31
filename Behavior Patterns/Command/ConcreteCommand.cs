@@ -8,7 +8,7 @@
 
         public override void Execute()
         {
-            throw new NotImplementedException();
+            receiver.Action();
         }
     }
 }

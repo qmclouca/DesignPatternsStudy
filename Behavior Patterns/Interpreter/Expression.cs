@@ -35,7 +35,7 @@
             while (context.Input.StartsWith(One())) 
             {
                 context.Output += (1 * Multiplier());
-                context.Input += context.Input.Substring(1);
+                context.Input = context.Input.Substring(1);
             }
         }
     }

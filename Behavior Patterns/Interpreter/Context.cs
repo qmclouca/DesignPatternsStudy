@@ -1,6 +1,6 @@
 ﻿namespace Interpreter
 {
-    internal class Context
+    public class Context
     {
         public string Input { get; set; }
         public int Output { get; set; }

@@ -4,16 +4,25 @@
     {
         static void Main(string[] args)
         {
-            var context = new Context();
-            var list = new List<AbstractExpression>();
-            list.Add(new TerminalExpression());
-            list.Add(new NonterminalExpression());
-            list.Add(new TerminalExpression());
-            list.Add(new TerminalExpression());
-            foreach (var item in list)
+            string roman = "MCMXXVIII";
+            Context context = new Context(roman);
+
+            // Build the 'parse tree'
+            List<Expression> tree = new List<Expression>();
+            tree.Add(new ThousandsExpression());
+            tree.Add(new HundredsExpression());
+            tree.Add(new DozensExpression());
+            tree.Add(new UnitsExpression());
+
+            // Interpret
+            foreach (Expression exp in tree)
             {
-                item.Interpret(context);
+                exp.Interpret(context);
             }
+
+            Console.WriteLine("{0} = {1}", roman, context.Output);
+            Console.ReadKey();
+           
         }
     }   
 }

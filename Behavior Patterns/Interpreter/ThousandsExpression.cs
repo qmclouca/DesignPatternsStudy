@@ -4,27 +4,27 @@
     {
         public override string Five()
         {
-            return "D";
+            return " ";
         }
 
         public override string Four()
         {
-            return "CD";
+            return " ";
         }
 
         public override int Multiplier()
         {
-            return 100;
+            return 1000;
         }
 
         public override string Nine()
         {
-            return "CM";
+            return " ";
         }
 
         public override string One()
         {
-            return "C";
+            return "M";
         }
     }
 }
